@@ -24,13 +24,13 @@ struct ContentView: View {
             })
             
             Button(action: {
-                store.dispatch(.restoreOriginal)
+                viewModel.dispatch(.restoreName)
             }, label: {
                 Text("Restore Name")
             })
             
             Button(action: {
-                store.dispatch(.presentView)
+                viewModel.dispatch(.beginPresenting)
             }, label: {
                 Text("Present View")
             })
