@@ -100,8 +100,7 @@ enum RoomViewModel {
     }
 
     private static func from(appState: AppState) -> RoomViewState {
-        print("***** changing name to \(appState.roomName)")
-        return RoomViewState(currentName: appState.roomName, isCurrentlyPresenting: appState.isPresenting, isShowingSettings: appState.isPresentingSettings)
+        RoomViewState(currentName: appState.roomName, isCurrentlyPresenting: appState.isPresenting, isShowingSettings: appState.isPresentingSettings)
     }
     
 }

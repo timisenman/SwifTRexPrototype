@@ -87,3 +87,44 @@ extension Binding {
         })
     }
 }
+
+public struct BindableViewModel<Action, State> {
+    private var viewModel: ObservableViewModel<Action, State>
+
+    public init(_ viewModel: ObservableViewModel<Action, State>) {
+        self.viewModel = viewModel
+    }
+
+    /// Creates a lens binding to the viewModel, dispatching the action returned by the closure to the store on `set`,
+    /// The  returned binding includes a local cache that will return the `set` value until the store updates.
+    public subscript<Value>(
+        path: KeyPath<State, Value>,
+        changeModifier: ChangeModifier = .notAnimated,
+        file: String = #file,
+        function: String = #function,
+        line: UInt = #line,
+        info: String? = nil,
+        action: ((Value) -> Action?)? = nil) -> Binding<Value> {
+            if let actionClosure = action {
+                return .store(viewModel,
+                              state: path,
+                              changeModifier: changeModifier,
+                              file: file,
+                              function: function,
+                              line: line,
+                              info: info,
+                              onChange: actionClosure)
+
+            } else {
+                return .getOnly(viewModel, state: path)
+            }
+    }
+}
+
+extension ObservableViewModel {
+    /// Creates a `Binding` lens for the `ViewModel`. All keypaths of the state are supported and
+    /// can be exposed as a `Binding`.
+    public var binding: BindableViewModel<ActionType, StateType> {
+        BindableViewModel(self)
+    }
+}
