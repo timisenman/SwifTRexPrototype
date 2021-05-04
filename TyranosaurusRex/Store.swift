@@ -41,7 +41,7 @@ let appReducer = roomReducer
 let store = ReduxStoreBase<AppAction, AppState>(
     subject: .combine(initialValue: AppState(roomName: "Tim's Room")),
     reducer: appReducer,
-    middleware: IdentityMiddleware() //RoomMiddleWare()
+    middleware: RoomMiddleWare()
 )
 
 struct AppState: Equatable {
@@ -70,18 +70,13 @@ enum RoomViewModel {
         ).asObservableViewModel(initialState: .initial)
     }
     
-    struct RoomViewState: Equatable {
-        static func == (lhs: RoomViewModel.RoomViewState, rhs: RoomViewModel.RoomViewState) -> Bool {
-            print("Printing a comparison?")
-            return true
-        }
-        
-        var currentName: String?
-        @Binding var isCurrentlyPresenting: Bool
-        @State var isShowingSettings = false
+    struct RoomViewState: Equatable {        
+        let currentName: String
+        let isCurrentlyPresenting: Bool
+        let isShowingSettings: Bool
         
         static var initial: RoomViewState {
-            .init(currentName: "Tim", isCurrentlyPresenting: .constant(false))
+            .init(currentName: "Tim", isCurrentlyPresenting: false, isShowingSettings: false)
         }
     }
     
@@ -105,7 +100,8 @@ enum RoomViewModel {
     }
 
     private static func from(appState: AppState) -> RoomViewState {
-        RoomViewState(currentName: "Tim, once again", isCurrentlyPresenting: .constant(false))
+        print("***** changing name to \(appState.roomName)")
+        return RoomViewState(currentName: appState.roomName, isCurrentlyPresenting: appState.isPresenting, isShowingSettings: appState.isPresentingSettings)
     }
     
 }
@@ -117,9 +113,9 @@ func absurd<T>(_ never: Never) -> T { }
 
 class RoomMiddleWare: Middleware {
     
-//    typealias InputActionType = AppAction // It wants to receive all possible app actions
-//    typealias OutputActionType = Never          // No action is generated from this Middleware
-//    typealias StateType = AppState        // It wants to read the whole app state
+    typealias InputActionType = AppAction // It wants to receive all possible app actions
+    typealias OutputActionType = AppAction          // No action is generated from this Middleware
+    typealias StateType = AppState        // It wants to read the whole app state
 //
     private var cancellables = Set<AnyCancellable>()
     private var currentState: GetState<AppState>?
@@ -131,20 +127,7 @@ class RoomMiddleWare: Middleware {
         
     }
     
-    func handle(action: AppState, from dispatcher: ActionSource, afterReducer: inout AfterReducer) {
-        guard let getState = self.currentState else { return }
-
-        let stateBefore = getState()
-        afterReducer = .do {
-            let stateAfter = getState()
-            print("State before: \(stateBefore)")
-            defer { print("blah blah\n") }
-            
-            print("Action: \(action) from \(dispatcher)")
-            guard stateBefore != stateAfter else { return }
-            print("Old State: \(stateBefore)")
-            print("New State: \(stateAfter)")
-        }
+    func handle(action: AppAction, from dispatcher: ActionSource, afterReducer: inout AfterReducer) {
     }
     
     

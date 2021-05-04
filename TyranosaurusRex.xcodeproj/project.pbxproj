@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		77D763522641760600919734 /* CombineRexSwiftUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D763512641760600919734 /* CombineRexSwiftUI.swift */; };
 		8D858084263953F400930E21 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D858083263953F400930E21 /* AppDelegate.swift */; };
 		8D858086263953F400930E21 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D858085263953F400930E21 /* SceneDelegate.swift */; };
 		8D858088263953F400930E21 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D858087263953F400930E21 /* ContentView.swift */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		77D763512641760600919734 /* CombineRexSwiftUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombineRexSwiftUI.swift; sourceTree = "<group>"; };
 		8D858080263953F400930E21 /* TyranosaurusRex.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TyranosaurusRex.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D858083263953F400930E21 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8D858085263953F400930E21 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -64,6 +66,7 @@
 				8D858085263953F400930E21 /* SceneDelegate.swift */,
 				8D858087263953F400930E21 /* ContentView.swift */,
 				8D85809C2639557200930E21 /* Store.swift */,
+				77D763512641760600919734 /* CombineRexSwiftUI.swift */,
 				8D858089263953F500930E21 /* Assets.xcassets */,
 				8D85808E263953F500930E21 /* LaunchScreen.storyboard */,
 				8D858091263953F500930E21 /* Info.plist */,
@@ -159,6 +162,7 @@
 				8D858084263953F400930E21 /* AppDelegate.swift in Sources */,
 				8D858086263953F400930E21 /* SceneDelegate.swift in Sources */,
 				8D858088263953F400930E21 /* ContentView.swift in Sources */,
+				77D763522641760600919734 /* CombineRexSwiftUI.swift in Sources */,
 				8D85809D2639557200930E21 /* Store.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

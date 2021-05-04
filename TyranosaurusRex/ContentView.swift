@@ -11,22 +11,14 @@ import CombineRex
 
 struct ContentView: View {
     @ObservedObject var viewModel: ObservableViewModel<RoomViewModel.RoomViewAction, RoomViewModel.RoomViewState>
-    @State private var nameText = ""
-    @State var cancellables = Set<AnyCancellable>()
-    @State var isPresenting = false
     
     var body: some View {
         VStack {
-            Text("Your name is \(nameText)")
+            Text("Your name is \(viewModel.state.currentName)")
                 .padding()
             
             Button(action: {
-                store.dispatch(.changeName)
-                store.statePublisher.sink { (state) in
-                    nameText = state.roomName
-                }
-                .store(in: &cancellables)
-                
+                viewModel.dispatch(.viewChangeName)
             }, label: {
                 Text("Change Name")
             })
@@ -39,25 +31,54 @@ struct ContentView: View {
             
             Button(action: {
                 store.dispatch(.presentView)
-                
-                store.statePublisher.sink { (state) in
-                    self.isPresenting = state.isPresenting
-                }
-                .store(in: &cancellables)
-                
             }, label: {
                 Text("Present View")
             })
         }
-        .onAppear(perform: {
-            store.statePublisher.sink { (state) in
-                nameText = state.roomName
-            }
-            .store(in: &cancellables)
-        })
-        .sheet(isPresented: $isPresenting, content: {
+        .sheet(isPresented: self.viewModel.binding[\.isCurrentlyPresenting], content: {
             OpenedRoom(fakeRoomModel: viewModel)
         })
+    }
+}
+
+public struct BindableViewModel<Action, State> {
+    private var viewModel: ObservableViewModel<Action, State>
+
+    public init(_ viewModel: ObservableViewModel<Action, State>) {
+        self.viewModel = viewModel
+    }
+
+    /// Creates a lens binding to the viewModel, dispatching the action returned by the closure to the store on `set`,
+    /// The  returned binding includes a local cache that will return the `set` value until the store updates.
+    public subscript<Value>(
+        path: KeyPath<State, Value>,
+        changeModifier: ChangeModifier = .notAnimated,
+        file: String = #file,
+        function: String = #function,
+        line: UInt = #line,
+        info: String? = nil,
+        action: ((Value) -> Action?)? = nil) -> Binding<Value> {
+            if let actionClosure = action {
+                return .store(viewModel,
+                              state: path,
+                              changeModifier: changeModifier,
+                              file: file,
+                              function: function,
+                              line: line,
+                              info: info,
+                              onChange: actionClosure)
+
+            } else {
+                return .getOnly(viewModel, state: path)
+            }
+    }
+}
+
+extension ObservableViewModel {
+    /// Creates a `Binding` lens for the `ViewModel`. All keypaths of the state are supported and
+    /// can be exposed as a `Binding`.
+    public var binding: BindableViewModel<ActionType, StateType> {
+        BindableViewModel(self)
     }
 }
 
@@ -82,9 +103,10 @@ struct OpenedRoom: View {
         .onDisappear {
             store.dispatch(.closeView)
         }
+        /*
         .sheet(isPresented: fakeRoomModel.state.$isShowingSettings, content: {
-            SettingsView(viewModel: SettingsViewModel())
-        })
+            SettingsView(viewModel: SettingsViewModel.viewModel(from: s))
+        })*/
     }
 }
 
