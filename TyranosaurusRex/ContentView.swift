@@ -24,7 +24,7 @@ struct ContentView: View {
             })
             
             Button(action: {
-                viewModel.dispatch(.restoreName)
+                viewModel.dispatch(.restoreName("hello"))
             }, label: {
                 Text("Restore Name")
             })
@@ -48,7 +48,7 @@ struct OpenedRoom: View {
         VStack(spacing: 30) {
             Text("You're in the concept of a room")
             Button(action: {
-                fakeRoomModel.dispatch(.restoreName)
+                fakeRoomModel.dispatch(.restoreName("goodbye"))
             }, label: {
                 Text("Change room name")
             })

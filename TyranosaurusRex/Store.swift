@@ -15,8 +15,8 @@ let roomReducer = Reducer<AppAction, AppState>.reduce { action, state in
     case .changeName:
         state.roomName = "Bitch"
         print("Name from reducer: \(state.roomName)")
-    case .restoreOriginal:
-        state.roomName = "Tim, again"
+    case let .restoreOriginal(str):
+        state.roomName = str
         print("Name from reducer: \(state.roomName)")
         
     case .presentView:
@@ -53,7 +53,7 @@ struct AppState: Equatable {
 
 enum AppAction {
     case changeName
-    case restoreOriginal
+    case restoreOriginal(String)
     case presentView
     case closeView
     case presentSettings
@@ -83,7 +83,7 @@ enum RoomViewModel {
     enum RoomViewAction {
         case viewChangeName
         case beginPresenting
-        case restoreName
+        case restoreName(String)
         case showSettings
     }
     
@@ -91,7 +91,7 @@ enum RoomViewModel {
         switch viewAction {
         case .viewChangeName: return .changeName
         case .beginPresenting: return .presentView
-        case .restoreName: return .restoreOriginal
+        case let .restoreName(str): return .restoreOriginal(str)
         case .showSettings: return .presentSettings
 //        case .plusButtonTap: return .count(.increment)
 //        case .minusButtonTap: return .count(.decrement)
