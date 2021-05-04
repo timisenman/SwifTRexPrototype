@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		77D763522641760600919734 /* CombineRexSwiftUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D763512641760600919734 /* CombineRexSwiftUI.swift */; };
+		7706C4A92641811E00FE2F10 /* CombineRextensions in Frameworks */ = {isa = PBXBuildFile; productRef = 7706C4A82641811E00FE2F10 /* CombineRextensions */; };
 		8D858084263953F400930E21 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D858083263953F400930E21 /* AppDelegate.swift */; };
 		8D858086263953F400930E21 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D858085263953F400930E21 /* SceneDelegate.swift */; };
 		8D858088263953F400930E21 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D858087263953F400930E21 /* ContentView.swift */; };
@@ -19,7 +19,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		77D763512641760600919734 /* CombineRexSwiftUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombineRexSwiftUI.swift; sourceTree = "<group>"; };
 		8D858080263953F400930E21 /* TyranosaurusRex.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TyranosaurusRex.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D858083263953F400930E21 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8D858085263953F400930E21 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -37,6 +36,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D85809A263954FB00930E21 /* CombineRex in Frameworks */,
+				7706C4A92641811E00FE2F10 /* CombineRextensions in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -66,7 +66,6 @@
 				8D858085263953F400930E21 /* SceneDelegate.swift */,
 				8D858087263953F400930E21 /* ContentView.swift */,
 				8D85809C2639557200930E21 /* Store.swift */,
-				77D763512641760600919734 /* CombineRexSwiftUI.swift */,
 				8D858089263953F500930E21 /* Assets.xcassets */,
 				8D85808E263953F500930E21 /* LaunchScreen.storyboard */,
 				8D858091263953F500930E21 /* Info.plist */,
@@ -101,6 +100,7 @@
 			name = TyranosaurusRex;
 			packageProductDependencies = (
 				8D858099263954FB00930E21 /* CombineRex */,
+				7706C4A82641811E00FE2F10 /* CombineRextensions */,
 			);
 			productName = TyranosaurusRex;
 			productReference = 8D858080263953F400930E21 /* TyranosaurusRex.app */;
@@ -131,6 +131,7 @@
 			mainGroup = 8D858077263953F400930E21;
 			packageReferences = (
 				8D858098263954FB00930E21 /* XCRemoteSwiftPackageReference "SwiftRex" */,
+				7706C4A72641811E00FE2F10 /* XCRemoteSwiftPackageReference "CombineRextensions" */,
 			);
 			productRefGroup = 8D858081263953F400930E21 /* Products */;
 			projectDirPath = "";
@@ -162,7 +163,6 @@
 				8D858084263953F400930E21 /* AppDelegate.swift in Sources */,
 				8D858086263953F400930E21 /* SceneDelegate.swift in Sources */,
 				8D858088263953F400930E21 /* ContentView.swift in Sources */,
-				77D763522641760600919734 /* CombineRexSwiftUI.swift in Sources */,
 				8D85809D2639557200930E21 /* Store.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -363,6 +363,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		7706C4A72641811E00FE2F10 /* XCRemoteSwiftPackageReference "CombineRextensions" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/teufelaudio/CombineRextensions";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.1.1;
+			};
+		};
 		8D858098263954FB00930E21 /* XCRemoteSwiftPackageReference "SwiftRex" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/swiftrex/SwiftRex.git";
@@ -374,6 +382,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		7706C4A82641811E00FE2F10 /* CombineRextensions */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7706C4A72641811E00FE2F10 /* XCRemoteSwiftPackageReference "CombineRextensions" */;
+			productName = CombineRextensions;
+		};
 		8D858099263954FB00930E21 /* CombineRex */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 8D858098263954FB00930E21 /* XCRemoteSwiftPackageReference "SwiftRex" */;

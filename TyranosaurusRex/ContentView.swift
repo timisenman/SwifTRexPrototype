@@ -8,6 +8,7 @@
 import SwiftUI
 import Combine
 import CombineRex
+import CombineRextensions
 
 struct ContentView: View {
     @ObservedObject var viewModel: ObservableViewModel<RoomViewModel.RoomViewAction, RoomViewModel.RoomViewState>

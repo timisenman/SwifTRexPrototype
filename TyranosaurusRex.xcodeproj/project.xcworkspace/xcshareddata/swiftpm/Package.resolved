@@ -2,6 +2,15 @@
   "object": {
     "pins": [
       {
+        "package": "CombineRextensions",
+        "repositoryURL": "https://github.com/teufelaudio/CombineRextensions",
+        "state": {
+          "branch": null,
+          "revision": "f79c1a85b0334c0d6577b6bfe897d645b21369ff",
+          "version": "0.1.1"
+        }
+      },
+      {
         "package": "ReactiveSwift",
         "repositoryURL": "https://github.com/ReactiveCocoa/ReactiveSwift.git",
         "state": {
