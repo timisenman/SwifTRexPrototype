@@ -65,17 +65,26 @@ struct OpenedRoom: View {
     @ObservedObject var fakeRoomModel: ObservableViewModel<RoomViewModel.RoomViewAction, RoomViewModel.RoomViewState>
     
     var body: some View {
-        VStack {
-            Text("Fuck you")
+        VStack(spacing: 30) {
+            Text("You're in the concept of a room")
             Button(action: {
                 fakeRoomModel.dispatch(.restoreName)
             }, label: {
                 Text("Change room name")
             })
+            
+            Button(action: {
+                
+            }, label: {
+                Text("Open Settings")
+            })
         }
         .onDisappear {
             store.dispatch(.closeView)
         }
+        .sheet(isPresented: fakeRoomModel.state.$isShowingSettings, content: {
+            SettingsView(viewModel: SettingsViewModel())
+        })
     }
 }
 
@@ -87,15 +96,15 @@ struct OpenedRoom: View {
 
 
 struct SettingsView: View {
-    
+    var viewModel: ObservableViewModel<SettingsViewModel.SettingsViewAction, SettingsViewModel.SettingsViewState>
     var body: some View {
         VStack {
-            Text("Tertiary View")
+            Text("Fake Settings View")
             
             Button(action: {
                 
             }, label: {
-                Text("Some Action")
+                Text("Change a Setting")
             })
         }
     }

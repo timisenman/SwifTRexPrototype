@@ -29,6 +29,10 @@ let roomReducer = Reducer<AppAction, AppState>.reduce { action, state in
         state.isPresenting = false
         state.isInRoom = false
         print("Is in room: \(state.isInRoom)")
+        
+    case .presentSettings:
+        print("Showing settings")
+        state.isPresentingSettings = true
     }
 }
 
@@ -44,7 +48,7 @@ struct AppState: Equatable {
     var roomName = ""
     var isInRoom = false
     var isPresenting = false
-    
+    var isPresentingSettings = false
 }
 
 enum AppAction {
@@ -52,6 +56,7 @@ enum AppAction {
     case restoreOriginal
     case presentView
     case closeView
+    case presentSettings
 }
 
 
@@ -73,6 +78,7 @@ enum RoomViewModel {
         
         var currentName: String?
         @Binding var isCurrentlyPresenting: Bool
+        @State var isShowingSettings = false
         
         static var initial: RoomViewState {
             .init(currentName: "Tim", isCurrentlyPresenting: .constant(false))
@@ -83,6 +89,7 @@ enum RoomViewModel {
         case viewChangeName
         case beginPresenting
         case restoreName
+        case showSettings
     }
     
     private static func from(viewAction: RoomViewAction) -> AppAction? {
@@ -90,6 +97,7 @@ enum RoomViewModel {
         case .viewChangeName: return .changeName
         case .beginPresenting: return .presentView
         case .restoreName: return .restoreOriginal
+        case .showSettings: return .presentSettings
 //        case .plusButtonTap: return .count(.increment)
 //        case .minusButtonTap: return .count(.decrement)
 //        case .changeName: return .changeName(.)
