@@ -35,7 +35,7 @@ struct ContentView: View {
                 Text("Present View")
             })
         }
-        .sheet(isPresented: self.viewModel.binding[\.isCurrentlyPresenting], content: {
+        .sheet(isPresented: viewModel.binding[\.isCurrentlyPresenting], content: {
             OpenedRoom(fakeRoomModel: viewModel)
         })
     }
@@ -54,7 +54,7 @@ struct OpenedRoom: View {
             })
             
             Button(action: {
-                
+                fakeRoomModel.dispatch(.showSettings)
             }, label: {
                 Text("Open Settings")
             })
@@ -62,10 +62,10 @@ struct OpenedRoom: View {
         .onDisappear {
             store.dispatch(.closeView)
         }
-        /*
-        .sheet(isPresented: fakeRoomModel.state.$isShowingSettings, content: {
-            SettingsView(viewModel: SettingsViewModel.viewModel(from: s))
-        })*/
+        
+        .sheet(isPresented: fakeRoomModel.binding[\.isShowingSettings], content: {
+            SettingsView(viewModel: SettingsViewModel.viewModel(from: store))
+        })
     }
 }
 
